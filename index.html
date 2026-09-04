@@ -257,7 +257,6 @@
   <div class="controls">
     <button id="spinBtn">Spin for a winner</button>
     <label><input type="checkbox" id="noRepeat" checked style="width:auto"> Don't repeat winners</label>
-    <div id="history"></div>
   </div>
 </div>
 <script>
@@ -301,12 +300,11 @@ function makeDigitUnit(){
 const digitUnits = [makeDigitUnit(), makeDigitUnit(), makeDigitUnit(), makeDigitUnit()];
 let picked = [];
 const btn = document.getElementById('spinBtn');
-const historyEl = document.getElementById('history');
 const confettiZone = document.getElementById('confettiZone');
 const confettiColors = ['#EF9F27','#D85A30','#1D9E75','#D4537E'];
 function fmt(n){ return 'A' + String(n).padStart(4,'0'); }
 function renderHistory(){
-  historyEl.textContent = picked.length ? ('Picked: ' + picked.map(fmt).join(', ')) : '';
+  // history display intentionally removed; picked[] still tracked for no-repeat logic
 }
 function burstConfetti(){
   for (let c = 0; c < 24; c++) {
