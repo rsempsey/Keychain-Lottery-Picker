@@ -6,67 +6,63 @@
 <title>The Backyard - Keychain Number Picker</title>
 <style>
   * { box-sizing: border-box; }
+  html, body { height: 100%; }
   body {
     margin: 0;
-    min-height: 100vh;
-    background: #f0f0f0;
+    background: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    padding: 1.5rem;
   }
   .card {
     background: #ffffff;
-    border-radius: 20px;
-    padding: 2rem 1.5rem;
-    max-width: 380px;
     width: 100%;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    height: 100vh;
+    aspect-ratio: 9 / 16;
+    max-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    padding: 2rem;
+    margin: 0 auto;
   }
   h1 { display: none; }
   .logo-wrap {
-    width: 112px;
-    height: 112px;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 0.5px solid #e5e5e5;
+    width: 260px;
+    height: 260px;
     margin: 0 auto;
-  }
-  .tagline {
-    text-align: center;
-    font-size: 13px;
-    color: #6b6b6b;
-    margin: 10px 0 20px;
   }
   .board-row {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 10px;
     background: #f4f4f4;
-    border-radius: 12px;
-    padding: 14px 18px;
-    border: 2px solid #d0d0d0;
+    border-radius: 16px;
+    padding: 22px 28px;
+    border: 3px solid #d0d0d0;
     position: relative;
     overflow: hidden;
   }
   .letter-A {
-    font-size: 32px;
+    font-size: 52px;
     font-weight: 700;
     font-family: "SF Mono", Menlo, Consolas, monospace;
     color: #111111;
   }
-  #reels { display: flex; gap: 4px; }
-  .flip-unit { perspective: 300px; width: 38px; height: 54px; position: relative; }
+  #reels { display: flex; gap: 6px; }
+  .flip-unit { perspective: 400px; width: 58px; height: 82px; position: relative; }
   .flip-card { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transform: rotateX(0deg); }
   .flip-face {
     position: absolute; inset: 0;
     backface-visibility: hidden;
     display: flex; align-items: center; justify-content: center;
-    font-size: 32px; font-weight: 700;
+    font-size: 50px; font-weight: 700;
     font-family: "SF Mono", Menlo, Consolas, monospace;
-    background: #ffffff; border-radius: 5px; color: #111111;
+    background: #ffffff; border-radius: 7px; color: #111111;
     box-shadow: 0 1px 4px rgba(0,0,0,0.18);
   }
   .flip-face::before {
@@ -81,25 +77,26 @@
   }
   .flip-back { transform: rotateX(180deg); }
   .flip-hinge {
-    position: absolute; top: 50%; left: 2px; right: 2px; height: 2px;
+    position: absolute; top: 50%; left: 3px; right: 3px; height: 3px;
     background: rgba(0,0,0,0.35); pointer-events: none; z-index: 2;
-    transform: translateY(-1px);
+    transform: translateY(-1.5px);
   }
-  .controls { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 22px; }
+  .controls { display: flex; flex-direction: column; align-items: center; gap: 20px; }
   button#spinBtn {
-    width: 180px; height: 44px; border-radius: 8px;
+    width: 260px; height: 64px; border-radius: 10px;
     background: #111111; color: #ffffff; border: none;
-    font-size: 15px; font-weight: 500; cursor: pointer;
+    font-size: 22px; font-weight: 500; cursor: pointer;
   }
   button#spinBtn:disabled { opacity: 0.5; cursor: default; }
   button#spinBtn:hover:not(:disabled) { background: #2a2a2a; }
   label {
-    display: flex; align-items: center; gap: 8px;
-    font-size: 13px; color: #6b6b6b; cursor: pointer;
+    display: flex; align-items: center; gap: 10px;
+    font-size: 18px; color: #6b6b6b; cursor: pointer;
   }
+  label input[type="checkbox"] { width: 20px; height: 20px; }
   #history {
-    font-size: 13px; color: #6b6b6b; text-align: center;
-    max-width: 320px; min-height: 18px;
+    font-size: 16px; color: #6b6b6b; text-align: center;
+    max-width: 420px; min-height: 22px;
   }
   @keyframes bd-fall {
     0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
@@ -111,7 +108,7 @@
 <div class="card">
   <h1>The Backyard keychain number picker</h1>
   <div class="logo-wrap">
-    <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1254 1254" width="112" height="112">
+    <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1254 1254" width="260" height="260">
       <defs>
         <style>
           .st0 { fill: #030606; } .st1 { fill: #fcfcfc; } .st2 { fill: #fcfdfc; }
@@ -253,7 +250,6 @@
       </g>
     </svg>
   </div>
-  <div class="tagline">Building fun together</div>
   <div class="board-row" id="confettiZone">
     <span class="letter-A">A</span>
     <div id="reels"></div>
@@ -347,11 +343,11 @@ btn.addEventListener('click', () => {
   btn.disabled = true;
   const choice = pool[Math.floor(Math.random()*pool.length)];
   const digitsStr = String(choice).padStart(4,'0');
-  const counts = [8, 12, 16, 20];
+  const counts = [10, 20, 30, 40];
   let finishedCount = 0;
   digitUnits.forEach((unit, i) => {
     const digit = parseInt(digitsStr[i], 10);
-    runReel(unit, digit, counts[i], 90, () => {
+    runReel(unit, digit, counts[i], 140, () => {
       finishedCount++;
       if (finishedCount === 4) {
         picked.push(choice);
