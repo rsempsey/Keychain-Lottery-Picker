@@ -332,7 +332,7 @@ function runReel(unit, finalDigit, flipCount, interval, onDone){
 renderHistory();
 btn.addEventListener('click', () => {
   const avoid = document.getElementById('noRepeat').checked;
-  const pool = avoid ? Array.from({length:120}, (_,i)=>i+1).filter(n => !picked.includes(n)) : Array.from({length:120}, (_,i)=>i+1);
+  const pool = avoid ? Array.from({length:162}, (_,i)=>i+1).filter(n => !picked.includes(n)) : Array.from({length:162}, (_,i)=>i+1);
   if (pool.length === 0) {
     btn.textContent = 'All picked';
     btn.disabled = true;
